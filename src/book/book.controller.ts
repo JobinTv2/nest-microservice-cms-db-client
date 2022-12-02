@@ -10,4 +10,9 @@ export class BookController {
   Create(createBookDto: CreateBookDto) {
     return this.bookService.create(createBookDto);
   }
+
+  @MessagePattern('db/book/get')
+  Get() {
+    return this.bookService.findAll();
+  }
 }

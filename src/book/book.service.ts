@@ -9,6 +9,12 @@ export class BookService {
     @InjectRepository(Book) private readonly bookRepository: Repository<Book>,
   ) {}
   create(createBookDto: CreateBookDto) {
-    return this.bookRepository.save(createBookDto);
+    const data = { createdAt: new Date(), ...createBookDto };
+    return this.bookRepository.save(data);
+  }
+
+  findAll() {
+    const results = this.bookRepository.find();
+    return results;
   }
 }
