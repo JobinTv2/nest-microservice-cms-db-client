@@ -13,4 +13,10 @@ export class AuthService {
   hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, 12);
   }
+
+  comparePassword(password: string, passwordhash: string): Promise<boolean> {
+    return bcrypt.compare(password, passwordhash).then((match) => {
+      return match;
+    });
+  }
 }
