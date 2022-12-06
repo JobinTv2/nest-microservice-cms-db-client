@@ -24,6 +24,11 @@ export class UserService {
     return this.userRepository.save(newUser);
   }
 
+  async findOneById(id: string) {
+    const user = await this.userRepository.findOneBy({ id: Number(id) });
+    return user;
+  }
+
   async findOneByEmail(email: string) {
     const user = await this.userRepository.findOneBy({ email });
     return user;
