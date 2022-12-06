@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -21,7 +21,9 @@ export class UserService {
       });
 
     const newUser = { ...createUserDto, password: hashPassword };
-    return this.userRepository.save(newUser);
+    const user = await this.userRepository.save(newUser);
+    const { password, ...rest } = user;
+    return rest;
   }
 
   async findOneById(id: string) {

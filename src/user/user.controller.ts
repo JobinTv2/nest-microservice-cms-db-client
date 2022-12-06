@@ -9,17 +9,17 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @MessagePattern('db/user/get')
-  GetUser(id: string) {
+  letUser(id: string) {
     return this.userService.findOneById(id);
   }
 
   @MessagePattern('db/user')
-  Create(createUserDto: CreateUserDto) {
+  create(createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
   @MessagePattern('/db/user/login')
-  Login(loginUserDto: LoginUserDto) {
+  login(loginUserDto: LoginUserDto) {
     return this.userService.login(loginUserDto);
   }
 }

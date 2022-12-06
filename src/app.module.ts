@@ -16,7 +16,6 @@ import { AuthModule } from './auth/auth.module';
       username: 'postgres',
       password: 'postgres',
       database: 'microservice-usedbooks',
-      synchronize: true,
       entities: [__dirname + '/**/*.entity{.ts, .js}'],
       autoLoadEntities: true,
     }),
