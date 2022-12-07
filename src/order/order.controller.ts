@@ -8,7 +8,7 @@ export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @MessagePattern('db/order')
-  Create(createOrderDto: CreateOrderDto) {
+  create(createOrderDto: CreateOrderDto) {
     return this.orderService.create(createOrderDto);
   }
 }
