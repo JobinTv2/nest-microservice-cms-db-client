@@ -25,7 +25,6 @@ export class UserController {
 
   @MessagePattern('db/validate/user')
   validateUser(loginUserDto: LoginUserDto) {
-    console.log(loginUserDto, 'login dto');
     return this.userService.validateUser(loginUserDto);
   }
 }
