@@ -37,7 +37,7 @@ export class UserService {
   }
 
   async login(loginUserDto: LoginUserDto) {
-    const user = await this.validateUser(loginUserDto);
+    const user = await this.findOneByEmail(loginUserDto.email);
     if (user) {
       const result = await this.authService.generateJWT(user);
       const { password, ...rest } = await this.findOneByEmail(
@@ -48,13 +48,13 @@ export class UserService {
         token: result,
       };
     }
-    throw new UnauthorizedException();
+    return false;
   }
 
   async validateUser(loginUserDto: LoginUserDto) {
     const user = await this.findOneByEmail(loginUserDto.email);
     if (!user) return null;
-    const result = this.authService
+    const result = await this.authService
       .comparePassword(loginUserDto.password, user.password)
       .then((match) => {
         if (match) {

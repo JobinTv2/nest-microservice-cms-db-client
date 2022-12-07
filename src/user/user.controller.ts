@@ -9,7 +9,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @MessagePattern('db/user/get')
-  letUser(id: string) {
+  getUser(id: string) {
     return this.userService.findOneById(id);
   }
 
@@ -21,5 +21,11 @@ export class UserController {
   @MessagePattern('/db/user/login')
   login(loginUserDto: LoginUserDto) {
     return this.userService.login(loginUserDto);
+  }
+
+  @MessagePattern('db/validate/user')
+  validateUser(loginUserDto: LoginUserDto) {
+    console.log(loginUserDto, 'login dto');
+    return this.userService.validateUser(loginUserDto);
   }
 }
