@@ -9,6 +9,10 @@ import { PassportModule } from '@nestjs/passport';
 import { UserModule } from 'src/user/user.module';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import * as dotenv from 'dotenv';
+
+dotenv.config({ path: '.env' });
+
 @Module({
   imports: [
     forwardRef(() => UserModule),
