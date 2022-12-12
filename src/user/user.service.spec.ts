@@ -33,7 +33,7 @@ describe('UserService', () => {
       );
 
       if (dto.email && !user) {
-        return user;
+        return !!user;
       }
       if (dto.email && user) {
         return user;
@@ -108,9 +108,9 @@ describe('UserService', () => {
     });
   });
 
-  it('should return undefined if no matching mail id founf', async () => {
+  it('should return undefined if no matching mail id found', async () => {
     expect(await service.findOneByEmail('falsemail@example.ocm')).toEqual(
-      undefined,
+      false,
     );
   });
 

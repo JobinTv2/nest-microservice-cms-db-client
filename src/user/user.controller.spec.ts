@@ -44,10 +44,14 @@ describe('UserController', () => {
       return user;
     }),
     validateUser: jest.fn((dto) => {
-      const { password, token, ...user } = users.find(
+      const result = users.find(
         (usr) => usr.email === dto.email && usr.password === dto.password,
       );
-      return user;
+      if (result) {
+        const { password, token, ...user } = result;
+        return user;
+      }
+      return !!result;
     }),
   };
   beforeEach(async () => {
@@ -120,4 +124,12 @@ describe('UserController', () => {
       email: 'user2@gmail.com',
       address: 'test address',
     }));
+
+  it('should return false if credentails are not matching', () =>
+    expect(
+      controller.validateUser({
+        email: 'fakeuser@example.com',
+        password: 'fakepassword',
+      }),
+    ).toEqual(false));
 });
