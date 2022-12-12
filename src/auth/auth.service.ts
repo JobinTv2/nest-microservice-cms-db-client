@@ -8,7 +8,6 @@ export class AuthService {
 
   generateJWT(user: User): Promise<string> {
     const { password, ...userData } = user;
-    console.log(user);
     return this.jwtService.signAsync(
       { userData },
       { secret: process.env.JWT_SECRET },

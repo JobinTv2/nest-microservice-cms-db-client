@@ -74,6 +74,7 @@ describe('UserController', () => {
         email: 'user2@gmail.com',
         address: 'test address',
         password: 'user2&123',
+        role: 'user',
       }),
     ).toEqual({
       id: expect.any(Number),
@@ -82,6 +83,7 @@ describe('UserController', () => {
       email: 'user2@gmail.com',
       address: 'test address',
       token: '',
+      role: 'user',
     }));
 
   it('should get a user by id', () =>

@@ -76,6 +76,7 @@ describe('UserService', () => {
       token: '',
       email: 'abcd@example.com',
       password: '$2b$12$HwHmdS5Z12Tzt6gOI1sZyelY8sSo04Qpw7T1Ln6ID9Z2sZSa4lVLW',
+      role: 'user',
     };
     const { password, ...rest } = user;
     expect(await service.create(user)).toEqual({
