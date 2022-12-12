@@ -70,7 +70,7 @@ describe('UserController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should create a user', () =>
+  it('should create a user', () => {
     expect(
       controller.create({
         name: 'User 2',
@@ -88,16 +88,26 @@ describe('UserController', () => {
       address: 'test address',
       token: '',
       role: 'user',
-    }));
+    });
+    expect(userMockService.create).toHaveBeenCalledWith({
+      name: 'User 2',
+      phone: 8956895689,
+      email: 'user2@gmail.com',
+      address: 'test address',
+      password: 'user2&123',
+      role: 'user',
+    });
+  });
 
-  it('should get a user by id', () =>
+  it('should get a user by id', () => {
     expect(controller.getUser(String(2))).toEqual({
       id: expect.any(Number),
       name: 'User 2',
       phone: 8956895689,
       email: 'user2@gmail.com',
       address: 'test address',
-    }));
+    });
+  });
 
   it('should return token and user details if credentails are correct', () =>
     expect(
@@ -111,7 +121,7 @@ describe('UserController', () => {
       token: 'test token',
     }));
 
-  it('should return if credentails are matching', () =>
+  it('should return if credentails are matching', () => {
     expect(
       controller.validateUser({
         email: 'user2@gmail.com',
@@ -123,7 +133,12 @@ describe('UserController', () => {
       phone: 8956895689,
       email: 'user2@gmail.com',
       address: 'test address',
-    }));
+    });
+    expect(userMockService.validateUser).toHaveBeenCalledWith({
+      email: 'user2@gmail.com',
+      password: 'user2&123',
+    });
+  });
 
   it('should return false if credentails are not matching', () =>
     expect(
