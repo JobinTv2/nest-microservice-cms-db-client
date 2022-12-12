@@ -14,4 +14,6 @@ export class User {
   email: string;
   @Column({ nullable: true, default: '' })
   address: string;
+  @Column()
+  role: string;
 }
