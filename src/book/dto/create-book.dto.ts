@@ -20,7 +20,7 @@ export class CreateBookDto {
   owner_id: number;
 
   @IsString()
-  categroy: string;
+  category: string;
 
   @IsString()
   reviews: string;
