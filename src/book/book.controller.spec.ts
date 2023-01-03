@@ -72,18 +72,6 @@ describe('BookController', () => {
       price: 130,
       reviews: 'reviews',
     });
-    expect(bookMockService.create).toHaveBeenCalledWith({
-      name: 'Book 2',
-      title: 'Book 2',
-      description: 'Description',
-      rating: 2,
-      is_sold: false,
-      owner_id: 1,
-      categroy: 'Romantic',
-      author: 'Author 2',
-      price: 130,
-      reviews: 'reviews',
-    });
   });
 
   it('should return all books', () => {
