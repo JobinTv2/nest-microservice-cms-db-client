@@ -21,8 +21,17 @@ export class UserService {
       });
 
     const newUser = { ...createUserDto, password: hashPassword };
-    const user = await this.userRepository.save(newUser);
-    const { password, ...rest } = user;
+    const result = await this.userRepository
+      .save(newUser)
+      .then((res) => res)
+      .catch((err) => {
+        return err;
+      });
+
+    if (Object.prototype.hasOwnProperty.call(result, 'driverError')) {
+      return { error: result };
+    }
+    const { password, ...rest } = result;
     return rest;
   }
 

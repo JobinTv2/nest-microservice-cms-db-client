@@ -23,7 +23,7 @@ describe('UserService', () => {
   ];
 
   const userMockRepository = {
-    save: jest.fn().mockImplementation((dto) => {
+    save: jest.fn().mockImplementation(async (dto) => {
       const { password, ...user } = dto;
       return { id: Date.now(), ...user };
     }),
