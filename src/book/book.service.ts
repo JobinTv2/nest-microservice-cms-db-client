@@ -21,11 +21,15 @@ export class BookService {
   async saveJson(data) {
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
-      await this.bookRepository.save({
-        ...item,
-        createdAt: new Date(),
-        is_sold: item.is_sold.toLowerCase(),
-      });
+      try {
+        await this.bookRepository.save({
+          ...item,
+          createdAt: new Date(),
+          is_sold: item.is_sold.toLowerCase(),
+        });
+      } catch (e) {
+        return { error: e };
+      }
     }
     return true;
   }
