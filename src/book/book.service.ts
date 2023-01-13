@@ -27,5 +27,6 @@ export class BookService {
         is_sold: item.is_sold.toLowerCase(),
       });
     }
+    return true;
   }
 }
