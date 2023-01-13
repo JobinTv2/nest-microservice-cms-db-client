@@ -17,4 +17,15 @@ export class BookService {
     const results = this.bookRepository.find();
     return results;
   }
+
+  async saveJson(data) {
+    for (let i = 0; i < data.length; i++) {
+      const item = data[i];
+      await this.bookRepository.save({
+        ...item,
+        createdAt: new Date(),
+        is_sold: item.is_sold.toLowerCase(),
+      });
+    }
+  }
 }

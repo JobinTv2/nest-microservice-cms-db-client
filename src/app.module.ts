@@ -6,6 +6,7 @@ import { OrderModule } from './order/order.module';
 import { BookModule } from './book/book.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AuthModule } from './auth/auth.module';
     BookModule,
     UserModule,
     AuthModule,
+    MulterModule.register({ dest: './uploads' }),
   ],
   controllers: [AppController],
   providers: [AppService],

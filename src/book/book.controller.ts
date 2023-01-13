@@ -15,4 +15,9 @@ export class BookController {
   Get() {
     return this.bookService.findAll();
   }
+
+  @MessagePattern('/book/upload')
+  CreateWithJSON(data) {
+    return this.bookService.saveJson(data);
+  }
 }
