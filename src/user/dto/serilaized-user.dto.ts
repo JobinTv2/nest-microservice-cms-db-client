@@ -1,11 +1,14 @@
+import { Exclude } from 'class-transformer';
 import { IsEmail, IsMobilePhone, IsOptional, IsString } from 'class-validator';
-export class CreateUserDto {
+
+export class SerializedUser {
   @IsString()
   name: string;
 
   @IsMobilePhone()
   phone: number;
 
+  @Exclude()
   @IsString()
   password: string;
 

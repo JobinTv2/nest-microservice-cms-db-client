@@ -5,7 +5,8 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { User } from './entities/user.entity';
-
+import { plainToClass } from 'class-transformer';
+import { SerializedUser } from './dto/serilaized-user.dto';
 @Injectable()
 export class UserService {
   constructor(
@@ -40,7 +41,7 @@ export class UserService {
     if (!user) {
       return { error: 'User not found' };
     }
-    return user;
+    return plainToClass(SerializedUser, user);
   }
 
   async findOneByEmail(email: string) {
