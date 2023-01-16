@@ -14,9 +14,14 @@ export class BookService {
     return this.bookRepository.save(data);
   }
 
-  findAll(options: IPaginationOptions) {
-    const results = this.bookRepository.find();
-    return paginate<Book>(this.bookRepository, options);
+  async findAll() {
+    const results = await this.bookRepository.find();
+    return results;
+  }
+
+  async findAllWithPagination(options: IPaginationOptions) {
+    const results = await paginate<Book>(this.bookRepository, options);
+    return results;
   }
 
   async saveJson(data) {
