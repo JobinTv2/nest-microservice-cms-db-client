@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { Book } from './entities/book.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBookDto } from './dto/create-book.dto';
+import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 @Injectable()
 export class BookService {
   constructor(
@@ -13,9 +14,9 @@ export class BookService {
     return this.bookRepository.save(data);
   }
 
-  findAll() {
+  findAll(options: IPaginationOptions) {
     const results = this.bookRepository.find();
-    return results;
+    return paginate<Book>(this.bookRepository, options);
   }
 
   async saveJson(data) {

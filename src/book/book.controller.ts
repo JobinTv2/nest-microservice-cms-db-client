@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Query } from '@nestjs/common';
 import { BookService } from './book.service';
 import { MessagePattern } from '@nestjs/microservices';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -11,9 +11,14 @@ export class BookController {
     return this.bookService.create(createBookDto);
   }
 
+  // @MessagePattern('db/book/get')
+  // Get() {
+  //   return this.bookService.findAll();
+  // }
+
   @MessagePattern('db/book/get')
-  Get() {
-    return this.bookService.findAll();
+  Get(options) {
+    return this.bookService.findAll(options);
   }
 
   @MessagePattern('/book/upload')
