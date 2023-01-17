@@ -25,11 +25,10 @@ export class BookService {
 
   async findAllWithPagination(options: Options) {
     const { search } = options;
-    console.log(search, 'search');
     if (search) {
       const queryBuilder = this.bookRepository.createQueryBuilder('book');
       queryBuilder
-        .where('book.title LIKE :title', { title: `%${search}%` })
+        .where('book.title ILIKE :title', { title: `%${search}%` })
         .getMany();
       const result = await paginate<Book>(queryBuilder, options);
       console.log(result);
