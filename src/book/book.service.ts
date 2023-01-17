@@ -4,6 +4,10 @@ import { Book } from './entities/book.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBookDto } from './dto/create-book.dto';
 import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
+
+interface Options extends IPaginationOptions {
+  search: string;
+}
 @Injectable()
 export class BookService {
   constructor(
@@ -19,9 +23,21 @@ export class BookService {
     return results;
   }
 
-  async findAllWithPagination(options: IPaginationOptions) {
-    const results = await paginate<Book>(this.bookRepository, options);
-    return results;
+  async findAllWithPagination(options: Options) {
+    const { search } = options;
+    console.log(search, 'search');
+    if (search) {
+      const queryBuilder = this.bookRepository.createQueryBuilder('book');
+      queryBuilder
+        .where('book.title LIKE :title', { title: `%${search}%` })
+        .getMany();
+      const result = await paginate<Book>(queryBuilder, options);
+      console.log(result);
+      return result;
+    } else {
+      const results = await paginate<Book>(this.bookRepository, options);
+      return results;
+    }
   }
 
   async saveJson(data) {
