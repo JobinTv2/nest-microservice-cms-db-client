@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Transport } from '@nestjs/microservices';
-import * as dtoenv from 'dotenv';
+// import * as dtoenv from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
 
-dtoenv.config();
+// dtoenv.config();
 const microserviceOptions = {
   transport: Transport.REDIS,
   options: {
